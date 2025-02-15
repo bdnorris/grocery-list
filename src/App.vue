@@ -5,19 +5,19 @@
 
   <main>
     <ProductList :stores="stores" />
-    <ProductAdder :stores="stores" />
+    <ProductEditor :stores="stores" />
   </main>
 </template>
 
 <script lang="ts">
-import ProductAdder from './components/ProductAdder.vue'
+import ProductEditor from './components/ProductEditor.vue'
 import ProductList from './components/ProductList.vue'
 import { type Store } from './db'
 
 export default {
   name: 'App',
   components: {
-    ProductAdder,
+    ProductEditor,
     ProductList
   },
   setup () {
