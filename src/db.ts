@@ -8,7 +8,6 @@ interface Product {
   id?: number;
   name: string;
   quantity: number;
-  type: string;
   stores: Array<Store>;
   checked: boolean;
   priority: number;
@@ -23,7 +22,7 @@ const db = new Dexie('GroceryList') as Dexie & {
 
 // Schema declaration:
 db.version(1).stores({
-  products: '++id, name, quantity, type, stores, checked, priority',
+  products: '++id, name, quantity, stores, checked, priority',
 });
 
 export type { Product };
