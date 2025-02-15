@@ -1,8 +1,8 @@
 <template>
   <h2>Product List</h2>
   <section class="product-list">
-    <ul v-if="products">
-      <li v-for="product in products" :key="product.id" :class="{'checked': product.checked}">
+    <ul v-if="sortedProducts">
+      <li v-for="product in sortedProducts" :key="product.id" :class="{'checked': product.checked}">
         <input
           type="checkbox"
           :checked="product.checked"
@@ -17,15 +17,17 @@
           {{ store.name }}
         </span>
         <button @click="removeProduct(product.id)">Delete</button>
-        <button type="button" @click="edit(product.id)">Edit</button>
-        <ProductEditor :product="product" :stores="stores" :edit="true" />
+        <button type="button" @click="edit(product.id)">
+          {{ productBeingEdited === product.id ? 'Close' : 'Edit' }}
+        </button>
+        <ProductEditor :product="product" :stores="stores" :edit="true" :hidden="productBeingEdited !== product.id" />
       </li>
     </ul>
   </section>
 </template>
 
 <script lang="ts">
-  import { ref } from 'vue';
+  import { ref, type Ref, computed } from 'vue';
   import { liveQuery } from "dexie";
   import { useObservable } from "@vueuse/rxjs";
   import { db } from "../db";
@@ -50,6 +52,7 @@ export default {
     const products = useObservable(
       liveQuery(() => db.products.toArray())
     );
+    const productBeingEdited: Ref<null|number> = ref(null);
     const removeProduct = async (id: number) => {
       try {
         await db.products.delete(id);
@@ -69,14 +72,35 @@ export default {
       }
     };
     const edit = (id: number) => {
-      productEditor.value = id;
+      if (productBeingEdited.value === id) {
+        productBeingEdited.value = null;
+      } else {
+        productBeingEdited.value = id;
+      }
     };
+    const sortedProducts = computed(() => {
+      if (products.value) {
+        const toSort = products.value.map((product) => {
+          return {
+            ...product
+          };
+        });
+        const sorted =  toSort.sort((a, b) => {
+          if (a.checked && !b.checked) return 1;
+          if (!a.checked && b.checked) return -1;
+          return a.priority - b.priority;
+        });
+        return sorted;
+      }
+      return [];
+    });
     return {
       db,
-      products,
+      sortedProducts,
       removeProduct,
       checkProduct,
       ProductEditor,
+      productBeingEdited,
       edit
     };
   }
