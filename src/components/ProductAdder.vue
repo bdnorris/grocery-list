@@ -17,8 +17,11 @@
         <label :for="store.id">{{ store.name }}</label>
       </div>
     </div>
-    <button>Add Product</button>
-    {{  productStores }}
+    <label>
+      Priority:
+      <input type="range" v-model="productPriority" min="1" max="10" />
+    </label>
+    <button type="submit">Add Product</button>
     <p>{{ status }}</p>
   </fieldset>
   </form>
@@ -40,8 +43,9 @@ export default {
   setup (props) {
     const productName = ref('');
     const productQuantity = ref(1);
-    const status = ref('');
+    const productPriority = ref(1);
     const productStores: Ref<Array<Store>>= ref([]);
+    const status = ref('');
 //
     const addProduct = async () => {
       let storesToAdd = productStores.value.map((store) => {
@@ -51,7 +55,8 @@ export default {
         await db.products.add({
           name: productName.value,
           quantity: productQuantity.value,
-          stores: storesToAdd
+          stores: storesToAdd,
+          priority: productPriority.value
         });
         status.value = 'Product added!';
       } catch (error) {
@@ -62,6 +67,7 @@ export default {
     return {
       productName,
       productQuantity,
+      productPriority,
       productStores,
       addProduct,
       status,
