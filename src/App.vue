@@ -5,7 +5,7 @@
 
   <main>
     <ProductList :stores="stores" />
-    <ProductEditor :stores="stores" />
+    <ProductEditor :stores="stores" :edit="false" />
   </main>
 </template>
 

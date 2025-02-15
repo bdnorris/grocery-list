@@ -8,7 +8,7 @@
           :checked="product.checked"
           @change="checkProduct(product.id)"
         />
-        {{ product.id }}
+        <!-- {{ product.id }} -->
         {{ product.name }}
         {{ product.quantity }}
         {{ product.priority }}
@@ -17,15 +17,19 @@
           {{ store.name }}
         </span>
         <button @click="removeProduct(product.id)">Delete</button>
+        <button type="button" @click="edit(product.id)">Edit</button>
+        <ProductEditor :product="product" :stores="stores" :edit="true" />
       </li>
     </ul>
   </section>
 </template>
 
 <script lang="ts">
+  import { ref } from 'vue';
   import { liveQuery } from "dexie";
   import { useObservable } from "@vueuse/rxjs";
   import { db } from "../db";
+  import ProductEditor from "./ProductEditor.vue";
   // import { type Product } from "../db";
   // import { type Store } from "../db";
 
@@ -37,8 +41,12 @@ export default {
       required: true
     }
   },
+  components: {
+    ProductEditor
+  },
   setup (props) {
     // console.log('stores', props.stores);
+    const productEditor = ref(null);
     const products = useObservable(
       liveQuery(() => db.products.toArray())
     );
@@ -60,11 +68,16 @@ export default {
         console.error('Error marking product as checked:', error);
       }
     };
+    const edit = (id: number) => {
+      productEditor.value = id;
+    };
     return {
       db,
       products,
       removeProduct,
-      checkProduct
+      checkProduct,
+      ProductEditor,
+      edit
     };
   }
 };
