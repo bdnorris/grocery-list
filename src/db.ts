@@ -1,13 +1,17 @@
 import Dexie, { type EntityTable } from 'dexie';
 
+interface Store {
+  id: number;
+  name: string;
+}
 interface Product {
   id?: number;
   name: string;
   quantity: number;
   type: string;
-  store: string;
+  stores: Array<Store>;
   checked: boolean;
-  importance: number;
+  priority: number;
 }
 
 const db = new Dexie('GroceryList') as Dexie & {
@@ -19,8 +23,9 @@ const db = new Dexie('GroceryList') as Dexie & {
 
 // Schema declaration:
 db.version(1).stores({
-  products: '++id, name, quantity, type, store, checked, importance',
+  products: '++id, name, quantity, type, stores, checked, priority',
 });
 
 export type { Product };
+export type { Store };
 export { db };

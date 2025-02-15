@@ -1,29 +1,57 @@
 <template>
+  <form @submit.prevent="addProduct">
+    <h2>Add Product</h2>
   <fieldset>
     <legend>Add new product</legend>
     <label>
       Name:
       <input v-model="productName" type="text" />
     </label>
-    <button @click="addProduct">Add Product</button>
+    <label>
+      Quantity:
+      <input v-model="productQuantity" type="number" value="1" step="1" />
+    </label>
+    <div>
+      <div v-for="store in stores" :key="store.id" class="checkbox-group">
+        <input v-model="productStores" type="checkbox" :id="store.id" :value="store" />
+        <label :for="store.id">{{ store.name }}</label>
+      </div>
+    </div>
+    <button>Add Product</button>
+    {{  productStores }}
     <p>{{ status }}</p>
   </fieldset>
+  </form>
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { ref, type Ref } from 'vue';
 import { db } from '../db';
+import { type Store } from '../db';
 
 export default {
   name: 'ProductAdder',
-  setup () {
+  props: {
+    stores: {
+      type: Array,
+      required: true
+    }
+  },
+  setup (props) {
     const productName = ref('');
+    const productQuantity = ref(1);
     const status = ref('');
-
+    const productStores: Ref<Array<Store>>= ref([]);
+//
     const addProduct = async () => {
+      let storesToAdd = productStores.value.map((store) => {
+        return { id: store.id, name: store.name };
+      });
       try {
         await db.products.add({
           name: productName.value,
+          quantity: productQuantity.value,
+          stores: storesToAdd
         });
         status.value = 'Product added!';
       } catch (error) {
@@ -33,9 +61,29 @@ export default {
 
     return {
       productName,
+      productQuantity,
+      productStores,
       addProduct,
-      status
+      status,
     };
   }
 };
 </script>
+
+<style scoped>
+fieldset {
+  border: 1px solid #ccc;
+  padding: 1em;
+  margin-block: 1em;
+}
+label {
+  display: block;
+  margin-block: 1em;
+}
+
+.checkbox-group {
+  display: flex;
+  gap: 0.5em;
+  margin-right: 1em;
+}
+</style>
