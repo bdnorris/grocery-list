@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { ref, type Ref } from 'vue';
+import { ref } from 'vue';
 import { db } from '../db';
 import { type Store } from '../db';
 
@@ -48,7 +48,8 @@ export default {
       default: true
     }
   },
-  setup (props) {
+  emits: ['product-updated'],
+  setup (props, { emit }) {
     const productName = props.product ? ref(props.product.name) : ref('');
     const productQuantity = props.product ? ref(props.product.quantity) : ref(1);
     const productPriority = props.product ? ref(props.product.priority) : ref(1);
@@ -88,6 +89,7 @@ export default {
           priority: productPriority.value
         });
         status.value = 'Product updated!';
+        emit('product-updated');
       } catch (error) {
         status.value = 'An error occurred: ' + error.message;
       }
