@@ -46,8 +46,7 @@
   import { useObservable } from "@vueuse/rxjs";
   import { db } from "../db";
   import ProductEditor from "./ProductEditor.vue";
-  // import { type Product } from "../db";
-  // import { type Store } from "../db";
+  import { type Product, type Store } from "../db";
 
 export default {
   name: 'ProductList',
@@ -61,12 +60,11 @@ export default {
     ProductEditor
   },
   setup (props) {
-    // console.log('stores', props.stores);
-    const productEditor = ref(null);
-    const products = useObservable(
+    const products: Array = useObservable(
       liveQuery(() => db.products.toArray())
     );
     const productBeingEdited: Ref<null|number> = ref(null);
+
     const removeProduct = async (id: number) => {
       try {
         await db.products.delete(id);
@@ -121,12 +119,12 @@ export default {
       return [];
     });
 
-    let localStores = computed(() => {
-      return props.stores.map((store) => {
+    const localStores = computed(() => {
+      return props.stores.map((store: Store) => {
         return {
           id: store.id,
           name: store.name,
-          itemCount: products.value ? products.value.filter((product) => product.stores.some((s) => s.id === store.id)).length : 0
+          itemCount: products.value ? products.value.filter((product: Product) => product.stores.some((s) => s.id === store.id)).length : 0
         };
       }).filter((store) => {
         return store.itemCount > 0;

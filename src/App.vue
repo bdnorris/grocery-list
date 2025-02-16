@@ -22,13 +22,13 @@ export default {
   },
   setup () {
     const stores: Array<Store> = [
-      { id: 1, name: 'Any' },
-      { id: 2, name: 'Aldi' },
-      { id: 3, name: 'Damaged Freight' },
-      { id: 4, name: 'Dollar Tree' },
-      { id: 5, name: 'Hardware' },
-      { id: 6, name: 'King Saver' },
-      { id: 7, name: 'Walmart' }
+      { id: 1, name: 'Any' , itemCount: 0},
+      { id: 2, name: 'Aldi' , itemCount: 0},
+      { id: 3, name: 'Damaged Freight' , itemCount: 0},
+      { id: 4, name: 'Dollar Tree' , itemCount: 0},
+      { id: 5, name: 'Hardware' , itemCount: 0},
+      { id: 6, name: 'King Saver' , itemCount: 0},
+      { id: 7, name: 'Walmart', itemCount: 0 }
     ]
     return {
       stores

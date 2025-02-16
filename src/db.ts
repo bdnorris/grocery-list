@@ -4,6 +4,7 @@ import dexieCloud from "dexie-cloud-addon";
 interface Store {
   id: number;
   name: string;
+  itemCount: number;
 }
 interface Product {
   id?: number;
