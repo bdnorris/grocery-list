@@ -14,7 +14,7 @@ interface Product {
   priority: number;
 }
 
-const db = new Dexie('GroceryList') as Dexie & {
+const db = new Dexie('GroceryList', {addons: [dexieCloud]}) as Dexie & {
   products: EntityTable<
     Product,
     'id' // primary key "id" (for the typings only)
