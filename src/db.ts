@@ -1,4 +1,4 @@
-import Dexie, { type EntityTable } from 'dexie';
+import Dexie, { type EntityTable, type DexieError } from 'dexie';
 import dexieCloud from "dexie-cloud-addon";
 
 interface Store {
@@ -35,4 +35,5 @@ db.cloud.configure({
 
 export type { Product };
 export type { Store };
+export type { DexieError };
 export { db };

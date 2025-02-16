@@ -42,7 +42,7 @@ import { liveQuery } from "dexie";
 import { useObservable } from "@vueuse/rxjs";
 import { db } from "../db";
 import ProductEditor from "./ProductEditor.vue";
-import { type Product, type Store } from "../db";
+import { type Product, type Store, type DexieError } from "../db";
 
 export default {
   name: 'ProductList',
@@ -57,29 +57,35 @@ export default {
   },
   setup(props) {
     const products: Ref<Array<Product>> = useObservable(
+      // @ts-expect-error unneeded type check on observable
       liveQuery(() => db.products.toArray())
     );
-    const productBeingEdited: Ref<null | number> = ref(null);
+    const productBeingEdited: Ref<null|number> = ref(null);
 
-    const removeProduct = async (id: number) => {
+    const removeProduct = async (id: number|undefined) => {
+      if (!id) return;
       try {
         await db.products.delete(id);
-      } catch (error) {
-        console.error('Error deleting product:', error);
+      } catch (error: unknown) {
+        const thisError = error as DexieError;
+        console.error('Error deleting product:', thisError);
       }
     };
-    const checkProduct = async (id: number) => {
+    const checkProduct = async (id: number|undefined) => {
+      if (!id) return;
       try {
         const product = await db.products.get(id);
         if (product) {
           product.checked = !product.checked;
           await db.products.update(id, { checked: product.checked });
         }
-      } catch (error) {
-        console.error('Error marking product as checked:', error);
+      } catch (error: unknown) {
+        const thisError = error as DexieError;
+        console.error('Error marking product as checked:', thisError);
       }
     };
-    const edit = (id: number) => {
+    const edit = (id: number|undefined) => {
+      if (!id) return;
       if (productBeingEdited.value === id) {
         productBeingEdited.value = null;
       } else {
@@ -89,7 +95,7 @@ export default {
     const closeEditors = () => {
       productBeingEdited.value = null;
     };
-    const selectedStore = ref('');
+    const selectedStore: Ref<number|null> = ref(null);
 
     const sortedProducts = computed(() => {
       if (products.value) {
@@ -124,7 +130,7 @@ export default {
         };
       }).filter((store) => {
         return store.itemCount > 0;
-      }).sort((a, b) => {
+      }).sort((a: Store, b: Store) => {
         // sort by most items
         return b.itemCount - a.itemCount;
       });

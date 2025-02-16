@@ -30,13 +30,13 @@
 <script lang="ts">
 import { ref } from 'vue';
 import { db } from '../db';
-import { type Store, type Product } from '../db';
+import { type Store, type Product, type DexieError } from '../db';
 
 export default {
   name: 'ProductEditor',
   props: {
     stores: {
-      type: Array<Store>,
+      type: Array as () => Array<Store>,
       required: true
     },
     product: {
@@ -62,18 +62,20 @@ export default {
 //
     const addProduct = async () => {
       let storesToAdd = productStores.value.map((store) => {
-        return { id: store.id, name: store.name };
+        return { id: store.id, name: store.name, itemCount: store.itemCount };
       });
       try {
         await db.products.add({
           name: productName.value,
           quantity: productQuantity.value,
           stores: storesToAdd,
-          priority: productPriority.value
+          priority: productPriority.value,
+          checked: false
         });
         status.value = 'Product added!';
-      } catch (error: DataError) {
-        status.value = 'An error occurred: ' + error.message;
+      } catch (error: unknown) {
+        const thisError = error as DexieError;
+        status.value = 'An error occurred: ' + thisError.message;
       }
     };
 
@@ -90,12 +92,14 @@ export default {
           name: productName.value,
           quantity: productQuantity.value,
           stores: storesToAdd,
-          priority: productPriority.value
+          priority: productPriority.value,
+          checked: false
         });
         status.value = 'Product updated!';
         emit('product-updated');
-      } catch (error: DataError) {
-        status.value = 'An error occurred: ' + error.message;
+      } catch (error: unknown) {
+        const thisError = error as DexieError;
+        status.value = 'An error occurred: ' + thisError.message;
       }
     };
 
