@@ -1,7 +1,14 @@
 <template>
   <h2>Product List</h2>
   <section class="product-list">
-    <ul v-if="sortedProducts">
+    <h3>Products</h3>
+    <select v-model="selectedStore">
+      <option value="">Select a store</option>
+      <option v-for="store in stores" :key="store.id" :value="store.id">
+        {{ store.name }}
+      </option>
+    </select>
+    <ul v-if="sortedProducts" :key="storeId">
       <li v-for="product in sortedProducts" :key="product.id" :class="{'checked': product.checked}">
         <input
           type="checkbox"
@@ -78,6 +85,8 @@ export default {
         productBeingEdited.value = id;
       }
     };
+    const selectedStore = ref(null);
+
     const sortedProducts = computed(() => {
       if (products.value) {
         const toSort = products.value.map((product) => {
@@ -90,7 +99,13 @@ export default {
           if (!a.checked && b.checked) return -1;
           return a.priority - b.priority;
         });
-        return sorted;
+        if (selectedStore.value) {
+          return sorted.filter((product) => {
+            return product.stores.some((store) => store.id === selectedStore.value);
+          });
+        } else {
+          return sorted;
+        }
       }
       return [];
     });
@@ -101,6 +116,7 @@ export default {
       checkProduct,
       ProductEditor,
       productBeingEdited,
+      selectedStore,
       edit
     };
   }
