@@ -48,7 +48,7 @@ export default {
   name: 'ProductList',
   props: {
     stores: {
-      type: Array,
+      type: Array as () => Array<Store>,
       required: true
     }
   },
@@ -128,7 +128,7 @@ export default {
           name: store.name,
           itemCount: products.value ? products.value.filter((product: Product) => product.stores.some((s) => s.id === store.id)).length : 0
         };
-      }).filter((store) => {
+      }).filter((store: Store) => {
         return store.itemCount > 0;
       }).sort((a: Store, b: Store) => {
         // sort by most items

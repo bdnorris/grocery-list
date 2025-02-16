@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { ref, type Ref } from 'vue';
 import { db } from '../db';
 import { type Store, type Product, type DexieError } from '../db';
 
@@ -50,9 +50,9 @@ export default {
   },
   emits: ['product-updated'],
   setup (props, { emit }) {
-    const productName = props.product ? ref(props.product.name) : ref('');
-    const productQuantity = props.product ? ref(props.product.quantity) : ref(1);
-    const productPriority = props.product ? ref(props.product.priority) : ref(1);
+    const productName: Ref<string> = props.product ? ref(props.product.name) : ref('');
+    const productQuantity: Ref<number> = props.product ? ref(props.product.quantity) : ref(1);
+    const productPriority: Ref<number> = props.product ? ref(props.product.priority) : ref(1);
     const productStores = props.product
       ? ref(props.product.stores.map((store: Store) => store))
       : ref([]);
@@ -81,7 +81,7 @@ export default {
 
     const editProduct = async () => {
       let storesToAdd = productStores.value.map((store) => {
-        return { id: store.id, name: store.name };
+        return { id: store.id, name: store.name, itemCount: store.itemCount };
       });
       if (!props.product) {
         status.value = 'No product to edit';
