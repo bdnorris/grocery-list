@@ -125,7 +125,7 @@ fieldset {
 }
 label {
   display: block;
-  margin-block: 1em;
+  margin-block: 0.25em;
 }
 
 .checkbox-group {

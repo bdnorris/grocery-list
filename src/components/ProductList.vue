@@ -3,12 +3,12 @@
   <section class="product-list">
     <h3>Products</h3>
     <select v-model="selectedStore">
-      <option value="">Select a store</option>
-      <option v-for="store in stores" :key="store.id" :value="store.id">
-        {{ store.name }}
+      <option value="" selected disabled>Select a store</option>
+      <option v-for="store in localStores" :key="store.id" :value="store.id">
+        {{ store.name }} {{ store.itemCount }}
       </option>
     </select>
-    <ul v-if="sortedProducts" :key="storeId">
+    <ul v-if="sortedProducts">
       <li v-for="product in sortedProducts" :key="product.id" :class="{'checked': product.checked}">
         <input
           type="checkbox"
@@ -16,9 +16,15 @@
           @change="checkProduct(product.id)"
         />
         <!-- {{ product.id }} -->
-        {{ product.name }}
-        {{ product.quantity }}
-        {{ product.priority }}
+        <h4>
+          {{ product.name }}
+        </h4>
+        <div>
+          Qty: {{ product.quantity }}
+        </div>
+        <div>
+          Priority: {{ product.priority }}
+        </div>
 
         <span v-for="store in product.stores" :key="store.id">
           {{ store.name }}
@@ -85,7 +91,7 @@ export default {
         productBeingEdited.value = id;
       }
     };
-    const selectedStore = ref(null);
+    const selectedStore = ref('');
 
     const sortedProducts = computed(() => {
       if (products.value) {
@@ -94,10 +100,11 @@ export default {
             ...product
           };
         });
+        // sort by priority and checked
         const sorted =  toSort.sort((a, b) => {
           if (a.checked && !b.checked) return 1;
           if (!a.checked && b.checked) return -1;
-          return a.priority - b.priority;
+          return b.priority - a.priority;
         });
         if (selectedStore.value) {
           return sorted.filter((product) => {
@@ -109,6 +116,21 @@ export default {
       }
       return [];
     });
+
+    let localStores = computed(() => {
+      return props.stores.map((store) => {
+        return {
+          id: store.id,
+          name: store.name,
+          itemCount: products.value ? products.value.filter((product) => product.stores.some((s) => s.id === store.id)).length : 0
+        };
+      }).filter((store) => {
+        return store.itemCount > 0;
+      }).sort((a, b) => {
+        // sort by most items
+        return b.itemCount - a.itemCount;
+      });
+    });
     return {
       db,
       sortedProducts,
@@ -117,6 +139,7 @@ export default {
       ProductEditor,
       productBeingEdited,
       selectedStore,
+      localStores,
       edit
     };
   }
