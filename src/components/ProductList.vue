@@ -4,6 +4,7 @@
     <h3>Products</h3>
     <select v-model="selectedStore">
       <option value="" selected disabled>Select a store</option>
+      <option value="">All</option>
       <option v-for="store in localStores" :key="store.id" :value="store.id">
         {{ store.name }} {{ store.itemCount }}
       </option>
@@ -33,7 +34,7 @@
         <button type="button" @click="edit(product.id)">
           {{ productBeingEdited === product.id ? 'Close' : 'Edit' }}
         </button>
-        <ProductEditor :product="product" :stores="stores" :edit="true" :hidden="productBeingEdited !== product.id" />
+        <ProductEditor :product="product" :stores="stores" :edit="true" :hidden="productBeingEdited !== product.id" @product-updated="closeEditors" />
       </li>
     </ul>
   </section>
@@ -91,6 +92,9 @@ export default {
         productBeingEdited.value = id;
       }
     };
+    const closeEditors = () => {
+      productBeingEdited.value = null;
+    };
     const selectedStore = ref('');
 
     const sortedProducts = computed(() => {
@@ -138,6 +142,7 @@ export default {
       checkProduct,
       ProductEditor,
       productBeingEdited,
+      closeEditors,
       selectedStore,
       localStores,
       edit
