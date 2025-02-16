@@ -30,17 +30,17 @@
 <script lang="ts">
 import { ref } from 'vue';
 import { db } from '../db';
-import { type Store } from '../db';
+import { type Store, type Product } from '../db';
 
 export default {
   name: 'ProductEditor',
   props: {
     stores: {
-      type: Array,
+      type: Array<Store>,
       required: true
     },
     product: {
-      type: Object,
+      type: Object as () => Product,
       required: false
     },
     edit: {
@@ -72,7 +72,7 @@ export default {
           priority: productPriority.value
         });
         status.value = 'Product added!';
-      } catch (error) {
+      } catch (error: DataError) {
         status.value = 'An error occurred: ' + error.message;
       }
     };
@@ -81,6 +81,10 @@ export default {
       let storesToAdd = productStores.value.map((store) => {
         return { id: store.id, name: store.name };
       });
+      if (!props.product) {
+        status.value = 'No product to edit';
+        return;
+      }
       try {
         await db.products.update(props.product.id, {
           name: productName.value,
@@ -90,7 +94,7 @@ export default {
         });
         status.value = 'Product updated!';
         emit('product-updated');
-      } catch (error) {
+      } catch (error: DataError) {
         status.value = 'An error occurred: ' + error.message;
       }
     };

@@ -10,13 +10,8 @@
       </option>
     </select>
     <ul v-if="sortedProducts">
-      <li v-for="product in sortedProducts" :key="product.id" :class="{'checked': product.checked}">
-        <input
-          type="checkbox"
-          :checked="product.checked"
-          @change="checkProduct(product.id)"
-        />
-        <!-- {{ product.id }} -->
+      <li v-for="product in sortedProducts" :key="product.id" :class="{ 'checked': product.checked }">
+        <input type="checkbox" :checked="product.checked" @change="checkProduct(product.id)" />
         <h4>
           {{ product.name }}
         </h4>
@@ -34,19 +29,20 @@
         <button type="button" @click="edit(product.id)">
           {{ productBeingEdited === product.id ? 'Close' : 'Edit' }}
         </button>
-        <ProductEditor :product="product" :stores="stores" :edit="true" :hidden="productBeingEdited !== product.id" @product-updated="closeEditors" />
+        <ProductEditor :product="product" :stores="stores" :edit="true" :hidden="productBeingEdited !== product.id"
+          @product-updated="closeEditors" />
       </li>
     </ul>
   </section>
 </template>
 
 <script lang="ts">
-  import { ref, type Ref, computed } from 'vue';
-  import { liveQuery } from "dexie";
-  import { useObservable } from "@vueuse/rxjs";
-  import { db } from "../db";
-  import ProductEditor from "./ProductEditor.vue";
-  import { type Product, type Store } from "../db";
+import { ref, type Ref, computed } from 'vue';
+import { liveQuery } from "dexie";
+import { useObservable } from "@vueuse/rxjs";
+import { db } from "../db";
+import ProductEditor from "./ProductEditor.vue";
+import { type Product, type Store } from "../db";
 
 export default {
   name: 'ProductList',
@@ -59,11 +55,11 @@ export default {
   components: {
     ProductEditor
   },
-  setup (props) {
-    const products: Array = useObservable(
+  setup(props) {
+    const products: Ref<Array<Product>> = useObservable(
       liveQuery(() => db.products.toArray())
     );
-    const productBeingEdited: Ref<null|number> = ref(null);
+    const productBeingEdited: Ref<null | number> = ref(null);
 
     const removeProduct = async (id: number) => {
       try {
@@ -97,13 +93,13 @@ export default {
 
     const sortedProducts = computed(() => {
       if (products.value) {
-        const toSort = products.value.map((product) => {
+        const toSort = products.value.map((product: Product) => {
           return {
             ...product
           };
         });
         // sort by priority and checked
-        const sorted =  toSort.sort((a, b) => {
+        const sorted = toSort.sort((a: Product, b: Product) => {
           if (a.checked && !b.checked) return 1;
           if (!a.checked && b.checked) return -1;
           return b.priority - a.priority;
