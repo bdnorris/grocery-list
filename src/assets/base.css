@@ -1,12 +1,15 @@
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
-  --color-night-sky: #355070;
+  --color-prussian: #233851;
+  --color-indigo: #2E4561;
   --color-ultra-violet: #515575;
   --color-violet: #6d597a;
   --color-rose: #b56576;
   --color-coral: #e56b6f;
   --color-pink: #e88c7d;
   --color-tan: #eaac8b;
+  --color-dogwood: #F5D1BE;
+  --color-seashell: #FFF6F1;
 
   --unit: 0.6rem;
   --spaceIncrement: 1.66;
@@ -26,9 +29,9 @@
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(var(--color-tan));
-  --color-background-muted: var(--color-pink);
-  --color-text: var(--color-night-sky);
+  --color-background: var(var(--color-seashell));
+  --color-background-muted: var(--color-dogwood);
+  --color-text: var(--color-prussian);
 
   --section-gap: 160px;
   --baseTextSize: 1rem;
@@ -51,9 +54,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--color-night-sky);
-    --color-background-mute: var(--color-ultra-violet);
-    --color-text: var(--color-tan);
+    --color-background: var(--color-prussian);
+    --color-background-muted: var(--color-indigo);
+    --color-text: var(--color-seashell);
   }
 }
 
@@ -67,7 +70,7 @@
 
 @font-face {
   font-family: 'Atkinson';
-  src: url('/AtkinsonHyperlegibleNext-VariableFont_wght.ttf') format('truetype');
+  src: url('/fonts/AtkinsonHyperlegibleNext-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
 }
 
