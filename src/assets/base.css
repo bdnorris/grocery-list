@@ -32,6 +32,9 @@
   --color-background: var(var(--color-seashell));
   --color-background-muted: var(--color-dogwood);
   --color-text: var(--color-prussian);
+  --color-disabled: var(--color-ultra-pink);
+  --color-disabled-muted: var(--color-tan);
+  --color-disabled-strong: var(--color-rose);
 
   --section-gap: 160px;
   --baseTextSize: 1rem;
@@ -57,6 +60,9 @@
     --color-background: var(--color-prussian);
     --color-background-muted: var(--color-indigo);
     --color-text: var(--color-seashell);
+    --color-disabled: var(--color-ultra-violet);
+    --color-disabled-muted: var(--color-violet);
+    --color-disabled-strong: var(--color-rose);
   }
 }
 

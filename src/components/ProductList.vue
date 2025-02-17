@@ -182,5 +182,13 @@ export default {
 
 .checked {
   text-decoration: line-through;
+  text-decoration-color: var(--color-disabled-strong);
+  text-decoration-thickness: 3px;
+}
+
+.product-list input[type="checkbox"]:checked + label {
+  background-color: var(--color-disabled);
+  color: var(--color-disabled-muted);
+  border-color: var(--color-disabled-strong);
 }
 </style>

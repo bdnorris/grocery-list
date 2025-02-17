@@ -65,4 +65,5 @@ input[type="checkbox"] + label {
 input[type="checkbox"]:checked + label {
   background-color: var(--color-text);
   color: var(--color-background);
+  border-color: var(--color-text);
 }
