@@ -7,7 +7,7 @@ interface Store {
   itemCount: number;
 }
 interface Product {
-  id?: number;
+  id?: string;
   name: string;
   quantity: number;
   stores: Array<Store>;

@@ -63,9 +63,10 @@ export default {
       // @ts-expect-error unneeded type check on observable
       liveQuery(() => db.products.toArray())
     );
-    const productBeingEdited: Ref<null|number> = ref(null);
+    console.log('products:', products);
+    const productBeingEdited: Ref<null|string> = ref(null);
 
-    const removeProduct = async (id: number|undefined) => {
+    const removeProduct = async (id: string|undefined) => {
       if (!id) return;
       try {
         await db.products.delete(id);
@@ -74,7 +75,7 @@ export default {
         console.error('Error deleting product:', thisError);
       }
     };
-    const checkProduct = async (id: number|undefined) => {
+    const checkProduct = async (id: string|undefined) => {
       if (!id) return;
       try {
         const product = await db.products.get(id);
@@ -87,7 +88,7 @@ export default {
         console.error('Error marking product as checked:', thisError);
       }
     };
-    const edit = (id: number|undefined) => {
+    const edit = (id: string|undefined) => {
       if (!id) return;
       if (productBeingEdited.value === id) {
         productBeingEdited.value = null;
@@ -98,7 +99,7 @@ export default {
     const closeEditors = () => {
       productBeingEdited.value = null;
     };
-    const selectedStore: Ref<number|null> = ref(null);
+    const selectedStore: Ref<number|string> = ref('');
 
     const sortedProducts = computed(() => {
       if (products.value) {
