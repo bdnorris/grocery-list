@@ -1,10 +1,9 @@
 <template>
-  <h2>Product List</h2>
   <section class="product-list">
-    <h3>Products</h3>
-    <select v-model="selectedStore">
-      <option value="" selected disabled>Select a store</option>
-      <option value="">All</option>
+    <h2>Products</h2>
+    <label for="filter-store">Filter by Store</label>
+    <select v-model="selectedStore" id="filter-store">
+      <option value="" selected>All</option>
       <option v-for="store in localStores" :key="store.id" :value="store.id">
         {{ store.name }} {{ store.itemCount }}
       </option>
@@ -13,9 +12,9 @@
       <li v-for="product in sortedProducts" :key="product.id" :class="{ 'checked': product.checked }">
         <input :id="product.id" type="checkbox" :checked="product.checked" @change="checkProduct(product.id)" />
         <label :for="product.id">
-          <h4>
+          <h3>
             {{ product.name }}
-          </h4>
+          </h3>
         </label>
         <div class="product-list__details">
           <div>
