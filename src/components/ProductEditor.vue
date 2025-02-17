@@ -152,4 +152,11 @@ label {
   gap: 0.5em;
   margin-right: 1em;
 }
+
+.product-editor__stores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-block: var(--space-s);
+}
 </style>

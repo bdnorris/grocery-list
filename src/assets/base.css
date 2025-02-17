@@ -25,6 +25,8 @@
   --textFrameRatio: 2.5;
   --textFrameY: 0.5em;
   --textFrameX: calc(var(--textFrameY) * var(--textFrameRatio));
+
+  --radius: 0.5em;
 }
 
 /* semantic color variables for this project */
@@ -35,6 +37,8 @@
   --color-disabled: var(--color-ultra-pink);
   --color-disabled-muted: var(--color-tan);
   --color-disabled-strong: var(--color-rose);
+  --color-clickable: var(--color-coral);
+  --color-clickable-muted: var(--color-pink);
 
   --section-gap: 160px;
   --baseTextSize: 1rem;
@@ -63,6 +67,8 @@
     --color-disabled: var(--color-ultra-violet);
     --color-disabled-muted: var(--color-violet);
     --color-disabled-strong: var(--color-rose);
+    --color-clickable: var(--color-coral);
+    --color-clickable-muted: var(--color-pink);
   }
 }
 

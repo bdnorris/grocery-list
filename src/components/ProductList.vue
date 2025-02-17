@@ -185,9 +185,15 @@ export default {
   text-decoration-thickness: 3px;
 }
 
-.product-list input[type="checkbox"]:checked + label {
+input[type="checkbox"].product-list__name:checked + label {
   background-color: var(--color-disabled);
   color: var(--color-disabled-muted);
   border-color: var(--color-disabled-strong);
+}
+
+.product-list__actions {
+  display: flex;
+  gap: var(--space-s);
+  margin-block: var(--space-s) var(--space-m);
 }
 </style>
