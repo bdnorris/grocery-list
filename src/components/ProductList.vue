@@ -154,21 +154,21 @@ export default {
 
 <style>
 .product-list {
-  margin-block: var(--spacing-large);
-  background-color: var(--color-background);
-  padding: var(--spacing-medium);
+  margin-block: var(--space-l);
+  background-color: var(--color-background-muted);
+  padding: var(--space-m);
   & ul {
     list-style: none;
     padding: 0;
     & li:nth-child(odd) {
-      background-color: var(--color-background-medium);
+      background-color: var(--color-background-muted);
     }
   }
 }
 
 .product-list__details {
   display: flex;
-  gap: var(--spacing-small);
+  gap: var(--space-s);
 }
 
 .checked {

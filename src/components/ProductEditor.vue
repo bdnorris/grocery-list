@@ -132,7 +132,7 @@ export default {
 <style>
 .product-editor {
   background-color: var(--color-background);
-  padding: var(--spacing-medium);
+  padding: var(--space-m);
   & hidden {
     display: none;
   }
