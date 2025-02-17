@@ -10,7 +10,7 @@
     </select>
     <ul v-if="sortedProducts">
       <li v-for="product in sortedProducts" :key="product.id" :class="{ 'checked': product.checked }">
-        <input :id="product.id" type="checkbox" :checked="product.checked" @change="checkProduct(product.id)" />
+        <input :id="product.id" type="checkbox" :checked="product.checked" @change="checkProduct(product.id)" class="product-list__name" />
         <label :for="product.id">
           <h3>
             {{ product.name }}
@@ -27,10 +27,12 @@
             {{ store.name }}
           </div>
         </div>
-        <button @click="removeProduct(product.id)">Delete</button>
-        <button type="button" @click="edit(product.id)">
-          {{ productBeingEdited === product.id ? 'Close' : 'Edit' }}
-        </button>
+        <div class="product-list__actions">
+          <button @click="removeProduct(product.id)">Delete</button>
+          <button type="button" @click="edit(product.id)">
+            {{ productBeingEdited === product.id ? 'Close' : 'Edit' }}
+          </button>
+        </div>
         <ProductEditor :product="product" :stores="stores" :edit="true" :hidden="productBeingEdited !== product.id"
           @product-updated="closeEditors" />
       </li>

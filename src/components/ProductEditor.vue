@@ -12,9 +12,9 @@
         Quantity:
         <input v-model="productQuantity" type="number" value="1" step="1" />
       </label>
-      <div>
+      <div class="product-editor__stores">
         <div v-for="store in stores" :key="store.id" class="checkbox-group">
-          <input v-model="productStores" type="checkbox" :id="store.id + hash" :value="store" />
+          <input v-model="productStores" type="checkbox" :id="store.id + hash" :value="store.id" />
           <label :for="store.id + hash">{{ store.name }}</label>
         </div>
       </div>
@@ -56,21 +56,20 @@ export default {
     const productQuantity: Ref<number> = props.product ? ref(props.product.quantity) : ref(1);
     const productPriority: Ref<number> = props.product ? ref(props.product.priority) : ref(1);
     const productStores = props.product
-      ? ref(props.product.stores.map((store: Store) => store))
+      ? ref(props.product.stores.map((store: Store) => store.id))
       : ref([]);
+    console.log(productStores);
     const status = ref('');
 
     const hash = Math.random().toString(36).substring(2, 15);
 //
     const addProduct = async () => {
-      let storesToAdd = productStores.value.map((store) => {
-        return { id: store.id, name: store.name, itemCount: store.itemCount };
-      });
+      const storesToAdd = getStoresToAdd();
       try {
         await db.products.add({
           name: productName.value,
           quantity: productQuantity.value,
-          stores: storesToAdd,
+          stores: storesToAdd ? storesToAdd : [],
           priority: productPriority.value,
           checked: false
         });
@@ -82,9 +81,7 @@ export default {
     };
 
     const editProduct = async () => {
-      let storesToAdd = productStores.value.map((store) => {
-        return { id: store.id, name: store.name, itemCount: store.itemCount };
-      });
+      const storesToAdd = getStoresToAdd();
       if (!props.product) {
         status.value = 'No product to edit';
         return;
@@ -93,7 +90,7 @@ export default {
         await db.products.update(props.product.id, {
           name: productName.value,
           quantity: productQuantity.value,
-          stores: storesToAdd,
+          stores: storesToAdd ? storesToAdd : [],
           priority: productPriority.value,
           checked: false
         });
@@ -112,6 +109,12 @@ export default {
         addProduct();
       }
     };
+
+    function getStoresToAdd () {
+      return props.stores.filter((store: Store) => {
+        return productStores.value.includes(store.id);
+      });
+    }
 
     return {
       productName,
