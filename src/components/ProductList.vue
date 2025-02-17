@@ -11,10 +11,12 @@
     </select>
     <ul v-if="sortedProducts">
       <li v-for="product in sortedProducts" :key="product.id" :class="{ 'checked': product.checked }">
-        <input type="checkbox" :checked="product.checked" @change="checkProduct(product.id)" />
-        <h4>
-          {{ product.name }}
-        </h4>
+        <input :id="product.id" type="checkbox" :checked="product.checked" @change="checkProduct(product.id)" />
+        <label :for="product.id">
+          <h4>
+            {{ product.name }}
+          </h4>
+        </label>
         <div class="product-list__details">
           <div>
             Qty: {{ product.quantity }}
@@ -156,13 +158,19 @@ export default {
 .product-list {
   margin-block: var(--space-l);
   background-color: var(--color-background-muted);
-  padding: var(--space-m);
+  padding: var(--space-l);
   & ul {
     list-style: none;
     padding: 0;
+    & li {
+      margin-block: var(--space-l);
+    }
     & li:nth-child(odd) {
       background-color: var(--color-background-muted);
     }
+  }
+  & h3 {
+    margin-block: 0;
   }
 }
 
