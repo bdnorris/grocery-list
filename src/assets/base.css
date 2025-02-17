@@ -2,10 +2,12 @@
 :root {
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
+  --vt-c-white-med: #f5f5f5;
   --vt-c-white-mute: #f2f2f2;
 
   --vt-c-black: #181818;
   --vt-c-black-soft: #222222;
+  --vt-c-black-med: #1c1c1c;
   --vt-c-black-mute: #282828;
 
   --vt-c-indigo: #2c3e50;
@@ -19,12 +21,15 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+
+  --spacing-medium: 2em;
 }
 
 /* semantic color variables for this project */
 :root {
   --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
+  --color-background-medium: var(--vt-c-white-med);
   --color-background-mute: var(--vt-c-white-mute);
 
   --color-border: var(--vt-c-divider-light-2);
@@ -34,12 +39,29 @@
   --color-text: var(--vt-c-text-light-1);
 
   --section-gap: 160px;
+  --baseTextSize: 1rem;
+
+  /* Shaper */
+  --textSizeIncrement: 1.4;
+
+  --text-xs: calc(var(--baseTextSize) / var(--textSizeIncrement));
+  --text-s: var(--baseTextSize);
+  --text-m: calc(var(--text-s) * var(--textSizeIncrement));
+  --text-l: calc(var(--text-m) * var(--textSizeIncrement));
+  --text-xl: calc(var(--text-l) * var(--textSizeIncrement));
+
+  --lineHeightFixedAmount: 0.35rem;
+  --lineHeightRelativeAmount: 1.1em;
+  --globalLineHeight: calc(var(--lineHeightFixedAmount) + var(--lineHeightRelativeAmount));
+
+  --fontFamily: Atkinson, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue';
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --color-background: var(--vt-c-black);
     --color-background-soft: var(--vt-c-black-soft);
+    --color-background-medium: var(--vt-c-black-med);
     --color-background-mute: var(--vt-c-black-mute);
 
     --color-border: var(--vt-c-divider-dark-2);
@@ -58,29 +80,49 @@
   font-weight: normal;
 }
 
+@font-face {
+  font-family: 'Atkinson';
+  src: url('/AtkinsonHyperlegibleNext-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+}
+
 body {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
+  background: var(--color-background-mute);
   transition:
     color 0.5s,
     background-color 0.5s;
   line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
+  font-family: var(--fontFamily), sans-serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+
+h1 {
+  font-size: var(--text-xl);
+  line-height: calc(var(--text-xl) + var(--globalLineHeight));
+}
+h2 {
+  font-size: var(--text-l);
+  line-height: calc(var(--text-l) + var(--globalLineHeight));
+}
+h3 {
+  font-size: var(--text-m);
+  line-height: calc(var(--text-m) + var(--globalLineHeight));
+}
+h4 {
+  font-size: var(--text-s);
+  line-height: calc(var(--text-s) + var(--globalLineHeight));
+}
+h5 {
+  font-size: var(--text-xs);
+  line-height: calc(var(--text-xs) + var(--globalLineHeight));
+}
+h6 {
+  font-size: var(--text-xs);
+  line-height: calc(var(--text-xs) + var(--globalLineHeight));
 }

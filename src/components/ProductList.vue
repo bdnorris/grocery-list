@@ -15,16 +15,17 @@
         <h4>
           {{ product.name }}
         </h4>
-        <div>
-          Qty: {{ product.quantity }}
+        <div class="product-list__details">
+          <div>
+            Qty: {{ product.quantity }}
+          </div>
+          <div>
+            Priority: {{ product.priority }}
+          </div>
+          <div v-for="store in product.stores" :key="store.id">
+            {{ store.name }}
+          </div>
         </div>
-        <div>
-          Priority: {{ product.priority }}
-        </div>
-
-        <span v-for="store in product.stores" :key="store.id">
-          {{ store.name }}
-        </span>
         <button @click="removeProduct(product.id)">Delete</button>
         <button type="button" @click="edit(product.id)">
           {{ productBeingEdited === product.id ? 'Close' : 'Edit' }}
@@ -151,9 +152,23 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .product-list {
-  margin-block: 1em;
+  margin-block: var(--spacing-large);
+  background-color: var(--color-background);
+  padding: var(--spacing-medium);
+  & ul {
+    list-style: none;
+    padding: 0;
+    & li:nth-child(odd) {
+      background-color: var(--color-background-medium);
+    }
+  }
+}
+
+.product-list__details {
+  display: flex;
+  gap: var(--spacing-small);
 }
 
 .checked {

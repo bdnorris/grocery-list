@@ -1,8 +1,7 @@
 <template>
   <header>
-    <h1>Groceries</h1>
+    <h1>Shopping</h1>
   </header>
-
   <main>
     <ProductList :stores="stores" />
     <ProductEditor :stores="stores" :edit="false" />

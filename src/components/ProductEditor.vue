@@ -1,30 +1,32 @@
 <template>
-  <form @submit.prevent="evalProduct">
-    <h2>{{ addOrEdit }} Product</h2>
-  <fieldset>
-    <legend>Add new product</legend>
-    <label>
-      Name:
-      <input v-model="productName" type="text" />
-    </label>
-    <label>
-      Quantity:
-      <input v-model="productQuantity" type="number" value="1" step="1" />
-    </label>
-    <div>
-      <div v-for="store in stores" :key="store.id" class="checkbox-group">
-        <input v-model="productStores" type="checkbox" :id="store.id + hash" :value="store" />
-        <label :for="store.id + hash">{{ store.name }}</label>
+  <section class="product-editor">
+    <form @submit.prevent="evalProduct">
+      <h2>{{ addOrEdit }} Product</h2>
+    <fieldset>
+      <legend>Add new product</legend>
+      <label>
+        Name:
+        <input v-model="productName" type="text" />
+      </label>
+      <label>
+        Quantity:
+        <input v-model="productQuantity" type="number" value="1" step="1" />
+      </label>
+      <div>
+        <div v-for="store in stores" :key="store.id" class="checkbox-group">
+          <input v-model="productStores" type="checkbox" :id="store.id + hash" :value="store" />
+          <label :for="store.id + hash">{{ store.name }}</label>
+        </div>
       </div>
-    </div>
-    <label>
-      Priority:
-      <input type="range" v-model="productPriority" min="1" max="10" />
-    </label>
-    <button type="submit">{{ addOrEdit }} Product</button>
-    <p>{{ status }}</p>
-  </fieldset>
-  </form>
+      <label>
+        Priority:
+        <input type="range" v-model="productPriority" min="1" max="10" />
+      </label>
+      <button type="submit">{{ addOrEdit }} Product</button>
+      <p>{{ status }}</p>
+    </fieldset>
+    </form>
+  </section>
 </template>
 
 <script lang="ts">
@@ -127,7 +129,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.product-editor {
+  background-color: var(--color-background);
+  padding: var(--spacing-medium);
+  & hidden {
+    display: none;
+  }
+}
 fieldset {
   border: 1px solid #ccc;
   padding: 1em;
