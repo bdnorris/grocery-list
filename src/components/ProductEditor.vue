@@ -54,7 +54,7 @@ export default {
   setup (props, { emit }) {
     const productName: Ref<string> = props.product ? ref(props.product.name) : ref('');
     const productQuantity: Ref<number> = props.product ? ref(props.product.quantity) : ref(1);
-    const productPriority: Ref<number> = props.product ? ref(props.product.priority) : ref(1);
+    const productPriority: Ref<number> = props.product ? ref(props.product.priority) : ref(5);
     const productStores = props.product
       ? ref(props.product.stores.map((store: Store) => store.id))
       : ref([]);
