@@ -4,26 +4,28 @@
       <h2>{{ addOrEdit }} Product</h2>
     <fieldset>
       <legend>Add new product</legend>
-      <label>
+      <label for="name">
         Name:
-        <input v-model="productName" type="text" />
       </label>
-      <label>
+      <input id="name" v-model="productName" type="text" />
+      <label for="quantity">
         Quantity:
-        <input v-model="productQuantity" type="number" value="1" step="1" />
       </label>
+      <input id="quantity" v-model="productQuantity" type="number" value="1" step="1" />
       <div class="product-editor__stores">
         <div v-for="store in stores" :key="store.id" class="checkbox-group">
           <input v-model="productStores" type="checkbox" :id="store.id + hash" :value="store.id" />
           <label :for="store.id + hash">{{ store.name }}</label>
         </div>
       </div>
-      <label>
+      <label for="priority">
         Priority:
-        <input type="range" v-model="productPriority" min="1" max="10" />
       </label>
-      <button type="submit">{{ addOrEdit }} Product</button>
-      <p>{{ status }}</p>
+      <input id="priority" type="range" v-model="productPriority" min="1" max="10" />
+      <div>
+        <button type="submit">{{ addOrEdit }}</button>
+        <p>{{ status }}</p>
+      </div>
     </fieldset>
     </form>
   </section>
@@ -58,7 +60,6 @@ export default {
     const productStores = props.product
       ? ref(props.product.stores.map((store: Store) => store.id))
       : ref([]);
-    console.log(productStores);
     const status = ref('');
 
     const hash = Math.random().toString(36).substring(2, 15);
@@ -126,7 +127,7 @@ export default {
       evalProduct,
       status,
       hash,
-      addOrEdit: props.edit ? 'Edit' : 'Add',
+      addOrEdit: props.edit ? 'Save' : 'Add Product',
     };
   }
 };

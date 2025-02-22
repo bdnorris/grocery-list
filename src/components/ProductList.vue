@@ -18,11 +18,13 @@
         </label>
         <div class="product-list__details">
           <div>
-            Qty: {{ product.quantity }}
+            <span class="visually-hidden">Quantity:</span>#️ {{ product.quantity }}
           </div>
           <div>
-            Priority: {{ product.priority }}
+            <span class="visually-hidden">Priority:</span>‼️ {{ product.priority }}
           </div>
+        </div>
+        <div class="product-list__stores">
           <div v-for="store in product.stores" :key="store.id">
             {{ store.name }}
           </div>
@@ -197,5 +199,9 @@ input[type="checkbox"].product-list__name:checked + label {
   display: flex;
   gap: var(--space-s);
   margin-block: var(--space-s) var(--space-m);
+}
+
+.product-list__stores {
+  font-size: 0.875em;
 }
 </style>

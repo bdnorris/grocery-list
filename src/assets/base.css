@@ -23,7 +23,7 @@
   --space-4xl: calc(var(--space-3xl) * var(--spaceIncrement));
 
   --textFrameRatio: 2.5;
-  --textFrameY: 0.5em;
+  --textFrameY: 0.375em;
   --textFrameX: calc(var(--textFrameY) * var(--textFrameRatio));
 
   --radius: 0.5em;
@@ -44,7 +44,7 @@
   --baseTextSize: 1rem;
 
   /* Shaper */
-  --textSizeIncrement: 1.4;
+  --textSizeIncrement: 1.3;
 
   --text-xs: calc(var(--baseTextSize) / var(--textSizeIncrement));
   --text-s: var(--baseTextSize);
