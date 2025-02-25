@@ -137,8 +137,25 @@ export default {
 .product-editor {
   background-color: var(--color-background);
   padding: var(--space-m);
+  position: relative;
+  z-index: 2;
   & hidden {
     display: none;
+  }
+  & input[type="checkbox"] {
+    display: none;
+  }
+  & input[type="checkbox"] + label {
+    cursor: pointer;
+    display: block;
+    border: 1px solid var(--color-text);
+    padding-block: var(--textFrameY);
+    padding-inline: var(--textFrameX);
+    border-radius: var(--radius);
+  }
+  & input[type="checkbox"]:checked + label {
+    background-color: var(--color-clickable);
+    color: var(--color-background);
   }
 }
 fieldset {

@@ -18,7 +18,7 @@
         </label>
         <div class="product-list__details">
           <div>
-            <span class="visually-hidden">Quantity:</span>#️ {{ product.quantity }}
+            <span class="visually-hidden">Quantity:</span><Icons icon="quantity"></Icons> {{ product.quantity }}
           </div>
           <div>
             <span class="visually-hidden">Priority:</span>‼️ {{ product.priority }}
@@ -48,6 +48,7 @@ import { liveQuery } from "dexie";
 import { useObservable } from "@vueuse/rxjs";
 import { db } from "../db";
 import ProductEditor from "./ProductEditor.vue";
+import Icons from "./Icons.vue";
 import { type Product, type Store, type DexieError } from "../db";
 
 export default {
@@ -59,7 +60,8 @@ export default {
     }
   },
   components: {
-    ProductEditor
+    ProductEditor,
+    Icons
   },
   setup(props) {
     const products: Ref<Array<Product>> = useObservable(
@@ -148,11 +150,12 @@ export default {
       removeProduct,
       checkProduct,
       ProductEditor,
+      Icons,
       productBeingEdited,
       closeEditors,
       selectedStore,
       localStores,
-      edit
+      edit,
     };
   }
 };
@@ -168,6 +171,17 @@ export default {
     padding: 0;
     & li {
       margin-block: var(--space-l);
+      padding: var(--textFrameY) var(--textFrameX);
+      border: 1px solid var(--color-text);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position: relative;
+      & > input[type="checkbox"] {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        z-index: 1;
+      }
     }
     & li:nth-child(odd) {
       background-color: var(--color-background-muted);
@@ -199,6 +213,8 @@ input[type="checkbox"].product-list__name:checked + label {
   display: flex;
   gap: var(--space-s);
   margin-block: var(--space-s) var(--space-m);
+  position: relative;
+  z-index: 2;
 }
 
 .product-list__stores {

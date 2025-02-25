@@ -27,6 +27,8 @@
   --textFrameX: calc(var(--textFrameY) * var(--textFrameRatio));
 
   --radius: 0.5em;
+
+  --shadow: 0.125em 0.333em 0.666em rgba(0, 0, 0, 0.2);
 }
 
 /* semantic color variables for this project */
