@@ -21,7 +21,7 @@
             <span class="visually-hidden">Quantity:</span><Icons icon="quantity"></Icons> {{ product.quantity }}
           </div>
           <div>
-            <span class="visually-hidden">Priority:</span>‼️ {{ product.priority }}
+            <span class="visually-hidden">Priority:</span><Icons icon="priority"></Icons> {{ product.priority }}
           </div>
         </div>
         <div class="product-list__stores">
