@@ -143,7 +143,9 @@ export default {
     display: none;
   }
   & input[type="checkbox"] {
-    display: none;
+    /* Hide the checkbox */
+    position: absolute;
+    left: -9999px;
   }
   & input[type="checkbox"] + label {
     cursor: pointer;
