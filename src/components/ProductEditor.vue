@@ -23,7 +23,7 @@
       </label>
       <input id="priority" type="range" v-model="productPriority" min="1" max="10" />
       <div>
-        <button type="submit">{{ addOrEdit }}</button>
+        <button type="submit"><Icons icon="save"></Icons>{{ addOrEdit }}</button>
         <p>{{ status }}</p>
       </div>
     </fieldset>
@@ -35,6 +35,7 @@
 import { ref, type Ref } from 'vue';
 import { db } from '../db';
 import { type Store, type Product, type DexieError } from '../db';
+import Icons from "./Icons.vue";
 
 export default {
   name: 'ProductEditor',
@@ -51,6 +52,9 @@ export default {
       type: Boolean,
       default: true
     }
+  },
+  components: {
+    Icons
   },
   emits: ['product-updated'],
   setup (props, { emit }) {
@@ -128,6 +132,7 @@ export default {
       status,
       hash,
       addOrEdit: props.edit ? 'Save' : 'Add Product',
+      Icons
     };
   }
 };

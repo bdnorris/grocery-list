@@ -14,6 +14,7 @@
   --unit: 0.6rem;
   --spaceIncrement: 1.66;
   
+  --space-xs: calc(var(--unit) / var(--spaceIncrement));
   --space-s: var(--unit);
   --space-m: calc(var(--space-s) * var(--spaceIncrement));
   --space-l: calc(var(--space-m) * var(--spaceIncrement));

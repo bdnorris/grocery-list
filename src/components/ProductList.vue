@@ -18,10 +18,10 @@
         </label>
         <div class="product-list__details">
           <div>
-            <span class="visually-hidden">Quantity:</span><Icons icon="quantity"></Icons> {{ product.quantity }}
+            <span class="visually-hidden">Quantity:</span><Icons icon="quantity"></Icons> <span>{{ product.quantity }}</span>
           </div>
           <div>
-            <span class="visually-hidden">Priority:</span><Icons icon="priority"></Icons> {{ product.priority }}
+            <span class="visually-hidden">Priority:</span><Icons icon="priority"></Icons> <span>{{ product.priority }}</span>
           </div>
         </div>
         <div class="product-list__stores">
@@ -30,8 +30,8 @@
           </div>
         </div>
         <div class="product-list__actions">
-          <button @click="removeProduct(product.id)">Delete</button>
-          <button type="button" @click="edit(product.id)">
+          <button @click="removeProduct(product.id)"><Icons icon="delete"></Icons>Delete</button>
+          <button type="button" @click="edit(product.id)"><Icons icon="edit"></Icons>
             {{ productBeingEdited === product.id ? 'Close' : 'Edit' }}
           </button>
         </div>
@@ -176,6 +176,11 @@ export default {
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       position: relative;
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      grid-template-areas: "name actions"
+        "details actions"
+        "stores actions";
       & > input[type="checkbox"] {
         position: absolute;
         inset: 0;
@@ -195,6 +200,11 @@ export default {
 .product-list__details {
   display: flex;
   gap: var(--space-s);
+  grid-area: details;
+  & div {
+    display: flex;
+    gap: var(--space-xs);
+  }
 }
 
 .checked {
@@ -211,13 +221,33 @@ input[type="checkbox"].product-list__name:checked + label {
 
 .product-list__actions {
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
   gap: var(--space-s);
   margin-block: var(--space-s) var(--space-m);
   position: relative;
   z-index: 2;
+  grid-area: actions;
+  & button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-s);
+  }
 }
 
 .product-list__stores {
   font-size: 0.875em;
+  display: flex;
+  gap: var(--space-xs);
+  grid-area: stores;
+  & div::after {
+    content: '•';
+    flex-grow: 1;
+    margin-left: var(--space-xs);
+  }
+  & div:last-child::after {
+    content: '';
+  }
 }
 </style>
