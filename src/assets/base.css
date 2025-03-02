@@ -34,7 +34,7 @@
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(var(--color-seashell));
+  --color-background: var(--color-seashell);
   --color-background-muted: var(--color-dogwood);
   --color-text: var(--color-prussian);
   --color-disabled: var(--color-ultra-pink);

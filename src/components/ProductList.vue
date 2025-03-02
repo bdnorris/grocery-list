@@ -176,6 +176,7 @@ export default {
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       position: relative;
+      background-color: var(--color-background);
       display: grid;
       grid-template-columns: 3fr 1fr;
       grid-template-areas: "name actions"
@@ -187,9 +188,6 @@ export default {
         opacity: 0;
         z-index: 1;
       }
-    }
-    & li:nth-child(odd) {
-      background-color: var(--color-background-muted);
     }
   }
   & h3 {
