@@ -9,7 +9,7 @@
       </option>
     </select>
     <ul v-if="sortedProducts">
-      <li v-for="product in sortedProducts" :key="product.id" :class="{ 'checked': product.checked }">
+      <li v-for="product in sortedProducts" :key="product.id" :class="{ 'checked': product.checked, 'product-list__item': true }">
         <input :id="product.id" type="checkbox" :checked="product.checked" @change="checkProduct(product.id)" class="product-list__name" />
         <label :for="product.id">
           <h3>
@@ -169,29 +169,41 @@ export default {
   & ul {
     list-style: none;
     padding: 0;
-    & li {
-      margin-block: var(--space-l);
-      padding: var(--textFrameY) var(--textFrameX);
-      border: 1px solid var(--color-text);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      position: relative;
-      background-color: var(--color-background);
-      display: grid;
-      grid-template-columns: 3fr 1fr;
-      grid-template-areas: "name actions"
-        "details actions"
-        "stores actions";
-      & > input[type="checkbox"] {
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        z-index: 1;
-      }
-    }
   }
   & h3 {
     margin-block: 0;
+  }
+}
+
+.product-list__item {
+  margin-block: var(--space-l);
+  padding: var(--textFrameY) var(--textFrameX);
+  border: 1px solid var(--color-text);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  position: relative;
+  background-color: var(--color-background);
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-areas: "name actions"
+    "details actions"
+    "stores actions";
+  & > input[type="checkbox"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    z-index: 1;
+  }
+}
+
+.product-list__item.checked {
+  background-color: var(--color-disabled);
+  color: var(--color-disabled-muted);
+  border-color: var(--color-disabled-strong);
+  & button {
+    background-color: var(--color-disabled-muted);
+    color: var(--color-disabled);
+    border-color: var(--color-disabled-strong);
   }
 }
 
@@ -203,12 +215,6 @@ export default {
     display: flex;
     gap: var(--space-xs);
   }
-}
-
-.checked {
-  text-decoration: line-through;
-  text-decoration-color: var(--color-disabled-strong);
-  text-decoration-thickness: 3px;
 }
 
 input[type="checkbox"].product-list__name:checked + label {

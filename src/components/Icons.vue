@@ -34,6 +34,10 @@ export default {
 </script>
 
 <style scoped>
+div {
+  width: 1.5em;
+  height: 1.5em;
+}
 svg {
   width: 1.5em;
   height: 1.5em;

@@ -67,8 +67,8 @@
     --color-background: var(--color-prussian);
     --color-background-muted: var(--color-indigo);
     --color-text: var(--color-seashell);
-    --color-disabled: var(--color-ultra-violet);
-    --color-disabled-muted: var(--color-violet);
+    --color-disabled: var(--color-violet);
+    --color-disabled-muted: var(--color-ultra-violet);
     --color-disabled-strong: var(--color-rose);
     --color-clickable: var(--color-coral);
     --color-clickable-muted: var(--color-pink);
