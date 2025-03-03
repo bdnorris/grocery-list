@@ -37,8 +37,8 @@
   --color-background: var(--color-seashell);
   --color-background-muted: var(--color-dogwood);
   --color-text: var(--color-prussian);
-  --color-disabled: var(--color-ultra-pink);
-  --color-disabled-muted: var(--color-tan);
+  --color-disabled: var(--color-tan);
+  --color-disabled-muted: var(--color-pink);
   --color-disabled-strong: var(--color-rose);
   --color-clickable: var(--color-coral);
   --color-clickable-muted: var(--color-pink);
