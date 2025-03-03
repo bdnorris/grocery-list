@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import emojiData from '../assets/emoji-database.json';
+import pluralToSingular from '../assets/plural-to-singular.ts';
 
 export default {
   name: 'EmojiPicker',
@@ -19,12 +20,7 @@ export default {
     function getEmoji (name: string) {
       const wordsInItemName = props.itemName.split(' ').map((word: string) => word.toLowerCase());
       // create an array with the original array, but also remove any plurals and add those as well
-      const wordsInItemNamePluralAndSingular = wordsInItemName.map((word: string) => {
-        if (word.endsWith('s')) {
-          return [word, word.slice(0, -1)];
-        }
-        return word;
-      }).flat();
+      const wordsInItemNamePluralAndSingular = [...wordsInItemName, ...wordsInItemName.map((word: string) => pluralToSingular(word))];
       console.log('wordsInItemNamePluralAndSingular:', wordsInItemNamePluralAndSingular);
       // search the emoji data for any matching characters in the wordsInItemName array
       const emojis = emojiData.map((item: { emoji: string, name: string }) => {
