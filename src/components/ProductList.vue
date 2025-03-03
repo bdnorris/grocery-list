@@ -15,6 +15,7 @@
           <h3>
             {{ product.name }}
           </h3>
+          <EmojiPicker :itemName="product.name" />
         </label>
         <div class="product-list__details">
           <div>
@@ -50,6 +51,7 @@ import { db } from "../db";
 import ProductEditor from "./ProductEditor.vue";
 import Icons from "./Icons.vue";
 import { type Product, type Store, type DexieError } from "../db";
+import EmojiPicker from './EmojiPicker.vue';
 
 export default {
   name: 'ProductList',
@@ -61,7 +63,8 @@ export default {
   },
   components: {
     ProductEditor,
-    Icons
+    Icons,
+    EmojiPicker
   },
   setup(props) {
     const products: Ref<Array<Product>> = useObservable(
@@ -207,6 +210,12 @@ export default {
   }
 }
 
+.product-list__name + label {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-s);
+}
+
 .product-list__details {
   display: flex;
   gap: var(--space-s);
@@ -233,10 +242,7 @@ input[type="checkbox"].product-list__name:checked + label {
   z-index: 2;
   grid-area: actions;
   & button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-s);
+
   }
 }
 

@@ -37,3 +37,7 @@ yarn build
 ```sh
 yarn lint
 ```
+
+
+# Emoji Data
+https://www.kaggle.com/datasets/eliasdabbas/emoji-data-descriptions-codepoints
