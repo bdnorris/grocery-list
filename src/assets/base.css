@@ -30,6 +30,7 @@
   --radius: 0.5em;
 
   --shadow: 0.125em 0.333em 0.666em rgba(0, 0, 0, 0.2);
+  --shadow-s: 0.066em 0.15em 0.333em rgba(0, 0, 0, 0.2);
 }
 
 /* semantic color variables for this project */
@@ -42,6 +43,7 @@
   --color-disabled-strong: var(--color-rose);
   --color-clickable: var(--color-coral);
   --color-clickable-muted: var(--color-pink);
+  --color-input-background: var(--color-seashell);
 
   --section-gap: 160px;
   --baseTextSize: 1rem;
@@ -72,6 +74,7 @@
     --color-disabled-strong: var(--color-rose);
     --color-clickable: var(--color-coral);
     --color-clickable-muted: var(--color-pink);
+    --color-input-background: var(--color-ultra-violet);
   }
 }
 

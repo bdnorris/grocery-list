@@ -5,7 +5,7 @@
     <select v-model="selectedStore" id="filter-store">
       <option value="" selected>All</option>
       <option v-for="store in localStores" :key="store.id" :value="store.id">
-        {{ store.name }} {{ store.itemCount }}
+        {{ store.name }} ({{ store.itemCount }})
       </option>
     </select>
     <ul v-if="sortedProducts">
@@ -186,16 +186,21 @@ export default {
   box-shadow: var(--shadow);
   position: relative;
   background-color: var(--color-background);
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  grid-template-areas: "name actions"
-    "details actions"
-    "stores actions";
   & > input[type="checkbox"] {
     position: absolute;
     inset: 0;
     opacity: 0;
     z-index: 1;
+  }
+}
+
+@media (min-width: 40em) {
+  .product-list__item {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-areas: "name actions"
+      "details actions"
+      "stores actions";
   }
 }
 
