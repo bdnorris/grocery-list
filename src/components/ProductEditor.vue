@@ -19,7 +19,7 @@
         </div>
       </div>
       <label for="priority">
-        Priority:
+        Priority: {{ productPriority }}
       </label>
       <input id="priority" type="range" v-model="productPriority" min="1" max="10" />
       <div>
