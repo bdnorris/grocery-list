@@ -3,11 +3,11 @@
     <form @submit.prevent="evalProduct">
       <h2>{{ addOrEdit }} Product</h2>
     <fieldset>
-      <legend>Add new product</legend>
+      <legend>{{ addOrEdit }} product</legend>
       <label for="name">
         Name:
       </label>
-      <input id="name" v-model="productName" type="text" />
+      <input id="name" v-model="productName" type="text" @focus="clearStatus" />
       <label for="quantity">
         Quantity:
       </label>
@@ -79,6 +79,7 @@ export default {
           checked: false
         });
         status.value = 'Product added!';
+        productName.value = '';
       } catch (error: unknown) {
         const thisError = error as DexieError;
         status.value = 'An error occurred: ' + thisError.message;
@@ -131,8 +132,9 @@ export default {
       evalProduct,
       status,
       hash,
-      addOrEdit: props.edit ? 'Save' : 'Add Product',
-      Icons
+      addOrEdit: props.edit ? 'Save' : 'Add',
+      Icons,
+      clearStatus: () => status.value = ''
     };
   }
 };
