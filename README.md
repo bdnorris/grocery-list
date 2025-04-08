@@ -41,3 +41,6 @@ yarn lint
 
 # Emoji Data
 https://www.kaggle.com/datasets/eliasdabbas/emoji-data-descriptions-codepoints
+
+# Icons
+https://www.streamlinehq.com/icons/remix-fill
