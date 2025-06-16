@@ -1,7 +1,7 @@
 <template>
   <section class="product-list">
     <h2>Products</h2>
-    <label for="filter-store">Filter by Store</label>
+    <label for="filter-store">Filter by Department</label>
     <select v-model="selectedStore" id="filter-store">
       <option value="" selected>All</option>
       <option v-for="store in localStores" :key="store.id" :value="store.id">
@@ -208,11 +208,7 @@ export default {
   background-color: var(--color-disabled);
   color: var(--color-disabled-muted);
   border-color: var(--color-disabled-strong);
-  & button {
-    background-color: var(--color-disabled-muted);
-    color: var(--color-disabled);
-    border-color: var(--color-disabled-strong);
-  }
+
 }
 
 .product-list__name + label {
