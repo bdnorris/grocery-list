@@ -26,8 +26,13 @@ export default {
       { id: 3, name: 'Dairy' , itemCount: 0},
       { id: 4, name: 'Canned' , itemCount: 0},
       { id: 5, name: 'Meat' , itemCount: 0},
-      { id: 6, name: 'Online' , itemCount: 0},
-      { id: 7, name: 'Hardware', itemCount: 0 }
+      { id: 6, name: 'Bakery' , itemCount: 0},
+      { id: 7, name: 'Drinks' , itemCount: 0},
+      { id: 8, name: 'Freezer' , itemCount: 0},
+      { id: 9, name: 'Packaged' , itemCount: 0},
+      { id: 10, name: 'Personal Care' , itemCount: 0},
+      { id: 11, name: 'Online' , itemCount: 0},
+      { id: 12, name: 'Hardware', itemCount: 0 }
     ]
     return {
       stores

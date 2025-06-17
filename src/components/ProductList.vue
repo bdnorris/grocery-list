@@ -206,8 +206,11 @@ export default {
 
 .product-list__item.checked {
   background-color: var(--color-disabled);
-  color: var(--color-disabled-muted);
+  color: var(--color-disabled-text);
   border-color: var(--color-disabled-strong);
+  & .product-list__details, & .product-list__stores {
+    display: none;
+  }
 
 }
 
@@ -229,7 +232,7 @@ export default {
 
 input[type="checkbox"].product-list__name:checked + label {
   background-color: var(--color-disabled);
-  color: var(--color-disabled-muted);
+  color: var(--color-disabled-text);
   border-color: var(--color-disabled-strong);
 }
 

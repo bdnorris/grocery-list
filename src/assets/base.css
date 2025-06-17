@@ -41,6 +41,7 @@
   --color-disabled: var(--color-tan);
   --color-disabled-muted: var(--color-pink);
   --color-disabled-strong: var(--color-rose);
+  --color-disabled-text: var(--color-seashell);
   --color-clickable: var(--color-coral);
   --color-clickable-muted: var(--color-pink);
   --color-input-background: var(--color-dogwood);
@@ -73,6 +74,7 @@
     --color-disabled: var(--color-violet);
     --color-disabled-muted: var(--color-ultra-violet);
     --color-disabled-strong: var(--color-rose);
+    --color-disabled-text: var(--color-prussian);
     --color-clickable: var(--color-coral);
     --color-clickable-muted: var(--color-pink);
     --color-input-background: var(--color-ultra-violet);
