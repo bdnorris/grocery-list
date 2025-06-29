@@ -15,7 +15,7 @@
       <div class="product-editor__stores">
         <div v-for="store in stores" :key="store.id" class="checkbox-group">
           <input v-model="productStores" type="checkbox" :id="store.id + hash" :value="store.id" />
-          <label :for="store.id + hash">{{ store.name }}</label>
+          <label :for="store.id + hash">{{ store.name }} {{ store.emoji }}</label>
         </div>
       </div>
       <label for="priority">

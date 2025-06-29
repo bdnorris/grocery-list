@@ -5,6 +5,7 @@ interface Store {
   id: number;
   name: string;
   itemCount: number;
+  emoji?: string; // Optional emoji for the store
 }
 interface Product {
   id?: string;
